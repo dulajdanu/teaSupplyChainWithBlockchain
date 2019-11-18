@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'QRScannerWidget.dart';
 import 'ProfilePage.dart';
+import 'SellingHistory.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -29,6 +30,17 @@ class HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                         builder: (BuildContext context) => Profile()));
               },
+            ),
+            ListTile(
+              title: Text('Selling History'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => SellingRate()));
+              },
+              // Update the state of the app.
+              // ...
             ),
             ListTile(
               title: Text('LogOut'),
