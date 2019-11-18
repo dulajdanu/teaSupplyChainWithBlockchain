@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 class loginPage extends StatefulWidget {
   @override
@@ -7,6 +8,9 @@ class loginPage extends StatefulWidget {
 
 class loginPageState extends State<loginPage> {
   final _formKey = GlobalKey<FormState>();
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,39 +52,71 @@ class loginPageState extends State<loginPage> {
                                   fontWeight: FontWeight.w700),
                             ),
                           )),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(20),
-                            labelText: "E Mail",
-                            labelStyle:
-                                TextStyle(fontSize: 20, color: Colors.white)),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: TextFormField(
+                          maxLines: 1,
+                          keyboardType: TextInputType.emailAddress,
+                          autofocus: false,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(10),
+                              hintText: "E Mail",
+                              icon: Icon(
+                                Icons.email,
+                                color: Colors.black,
+                              )),
+                          validator: (value) =>
+                              value.isEmpty ? 'E mail cannot be empty' : null,
+                          onSaved: (value) => email = value.trim(),
+                        ),
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(20),
-                            labelText: "Password",
-                            labelStyle:
-                                TextStyle(fontSize: 20, color: Colors.white)),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: TextFormField(
+                          maxLines: 1,
+                          obscureText: true,
+                          autofocus: false,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            icon: Icon(
+                              Icons.lock,
+                              color: Colors.black,
+                            ),
+                          ),
+                          validator: (value) =>
+                              value.isEmpty ? "Password cannot be empty" : null,
+                          onSaved: (value) => password = value.trim(),
+                        ),
                       ),
                       Container(
-                          margin: EdgeInsets.only(top: 20),
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Center(
+                        margin: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Center(
                             widthFactor: 2,
                             heightFactor: 1,
-                            child: Text(
-                              "LOGIN",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white60,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          )),
+                            child: RaisedButton(
+                              color: Colors.black,
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomePage()));
+                              },
+                              child: Text(
+                                "LOGIN",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white60,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            )),
+                      ),
                       Spacer(
-                        flex: 4,
+                        flex: 170,
                       ),
                     ],
                   ),
