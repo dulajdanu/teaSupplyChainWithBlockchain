@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:teatruth/sales_series.dart';
 import 'loginPage.dart';
 import 'QRScannerWidget.dart';
 import 'ProfilePage.dart';
 import 'SellingHistory.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'Products.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,6 +41,17 @@ class HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => SellingRate()));
+              },
+              // Update the state of the app.
+              // ...
+            ),
+            ListTile(
+              title: Text('Products '),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Products()));
               },
               // Update the state of the app.
               // ...
@@ -117,12 +131,11 @@ class HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadiusDirectional.circular(20),
                           color: Colors.amberAccent),
-                      constraints: BoxConstraints(
-                          minWidth: double.infinity, minHeight: 350),
+                      constraints: BoxConstraints(minWidth: double.infinity),
                       child: Column(
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+                            padding: EdgeInsets.all(10),
                             child: Text(
                               "Recent Transactions",
                               style: TextStyle(
@@ -131,28 +144,60 @@ class HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          ListTile(
-                            title: Text("Transaction 1"),
-                            subtitle: Text("Information About transaction 1"),
-                          ),
-                          ListTile(
-                            title: Text("Transaction 1"),
-                            subtitle: Text("Information About transaction 1"),
-                          ),
-                          ListTile(
-                            title: Text("Transaction 1"),
-                            subtitle: Text("Information About transaction 1"),
-                          ),
-                          ListTile(
-                            title: Text("Transaction 1"),
-                            subtitle: Text("Information About transaction 1"),
-                          ),
-                          ListTile(
-                            title: Text("Transaction 1"),
-                            subtitle: Text("Information About transaction 1"),
-                          )
                         ],
                       )),
+                ),
+                Expanded(
+                  child: ListView(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                title: Text("Transaction 1"),
+                                subtitle:
+                                    Text("Information About transaction 1"),
+                              ),
+                              ListTile(
+                                title: Text("Transaction 2"),
+                                subtitle:
+                                    Text("Information About transaction 2"),
+                              ),
+                              ListTile(
+                                title: Text("Transaction 3"),
+                                subtitle:
+                                    Text("Information About transaction 3"),
+                              ),
+                              ListTile(
+                                title: Text("Transaction 4"),
+                                subtitle:
+                                    Text("Information About transaction 4"),
+                              ),
+                              ListTile(
+                                title: Text("Transaction 5"),
+                                subtitle:
+                                    Text("Information About transaction 5"),
+                              ),
+                              ListTile(
+                                title: Text("Transaction 6"),
+                                subtitle:
+                                    Text("Information About transaction 6"),
+                              ),
+                              ListTile(
+                                title: Text("Transaction 7"),
+                                subtitle:
+                                    Text("Information About transaction 7"),
+                              ),
+                              ListTile(
+                                title: Text("Transaction 8"),
+                                subtitle:
+                                    Text("Information About transaction 8"),
+                              ),
+                            ],
+                          )),
+                    ],
+                  ),
                 )
               ],
             )

@@ -33,9 +33,24 @@ class QRWidgetState extends State<QRWidget> {
           ),
           Expanded(
             flex: 1,
-            child: Center(
-              child: Text('Scan result: $qrText'),
-            ),
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Text('Scan result: \n$qrText'),
+                    Spacer(
+                      flex: 1,
+                    ),
+                    RaisedButton(
+                      autofocus: false,
+                      color: Colors.redAccent,
+                      child: Text("Add to Databse"),
+                      onPressed: () {
+                        print("herlloooo");
+                      },
+                    )
+                  ],
+                )),
           )
         ],
       ),

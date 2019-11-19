@@ -23,7 +23,7 @@ class loginPageState extends State<loginPage> {
                 Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("assets/images/tea.jpg"),
+                          image: AssetImage("assets/images/back.jpg"),
                           fit: BoxFit.cover)),
                 ),
                 Center(
@@ -32,13 +32,16 @@ class loginPageState extends State<loginPage> {
                       Spacer(
                         flex: 1,
                       ),
-                      Container(
-                        height: 250,
-                        width: 300,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/tea1.png"),
-                                fit: BoxFit.cover)),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Container(
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/logo1.png"),
+                                  fit: BoxFit.fitHeight)),
+                        ),
                       ),
                       Container(
                           padding: EdgeInsets.all(10),

@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   # firebase_auth: ^0.14.0+9
   qr_code_scanner: ^0.0.12
+  charts_flutter: ^0.8.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -45,6 +46,8 @@ flutter:
     - assets/images/tea.jpg
     - assets/images/tea1.png
     - assets/images/user.png
+    - assets/images/logo1.png
+    - assets/images/back.jpg
 
   #  - images/a_dot_ham.jpeg
 
