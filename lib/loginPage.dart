@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'SignUp.dart';
+import 'ForgetPassword.dart';
 
 class loginPage extends StatefulWidget {
   @override
@@ -29,8 +31,8 @@ class loginPageState extends State<loginPage> {
                 Center(
                   child: Column(
                     children: <Widget>[
-                      Spacer(
-                        flex: 1,
+                      SizedBox(
+                        height: 10,
                       ),
                       Padding(
                         padding: EdgeInsets.all(20),
@@ -51,7 +53,7 @@ class loginPageState extends State<loginPage> {
                               "LOGIN",
                               style: TextStyle(
                                   fontSize: 50,
-                                  color: Colors.white60,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.w700),
                             ),
                           )),
@@ -91,36 +93,97 @@ class loginPageState extends State<loginPage> {
                           onSaved: (value) => password = value.trim(),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 20),
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Center(
-                            widthFactor: 2,
-                            heightFactor: 1,
-                            child: RaisedButton(
-                              color: Colors.black,
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            HomePage()));
-                              },
-                              child: Text(
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          HomePage()));
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Colors.green,
+                                    Colors.greenAccent
+                                  ]),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                  child: Text(
                                 "LOGIN",
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.white60,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.w700),
-                              ),
-                            )),
+                              )),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SignUp()));
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Colors.green,
+                                    Colors.greenAccent
+                                  ]),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                  child: Text(
+                                "SIGN UP",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),
+                              )),
+                            ),
+                          )
+                        ],
                       ),
-                      Spacer(
-                        flex: 170,
+                      SizedBox(
+                        height: 110,
                       ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ForgetPass()));
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 210,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [Colors.green, Colors.greenAccent]),
+                              color: Colors.greenAccent,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Center(
+                              child: Text(
+                            "FORGOT PASSWORD ?",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700),
+                          )),
+                        ),
+                      )
                     ],
                   ),
                 )

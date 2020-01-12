@@ -107,6 +107,7 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text(
           "Home",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
@@ -131,52 +132,42 @@ class HomePageState extends State<HomePage> {
                               'Boxes Scanned Today',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              "0",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Icon(
+                                  FontAwesomeIcons.box,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "0",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30),
+                                )
+                              ],
                             )
                           ],
                         ),
-                        width: 100,
+                        width: 200,
                         height: 110,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color: Colors.lightBlueAccent,
                             border: Border.all(width: 3)),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(9),
-                        width: 100,
-                        height: 110,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Text(
-                              "Complains",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(width: 3),
-                          color: Colors.redAccent,
-                        ),
-                      )
                     ],
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(20),
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
+                      Icon(FontAwesomeIcons.qrcode),
                       Container(
                           child: RaisedButton(
-                        color: Colors.lightGreen,
+                        color: Colors.red,
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -194,8 +185,9 @@ class HomePageState extends State<HomePage> {
                   padding: EdgeInsets.all(10),
                   child: Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadiusDirectional.circular(20),
-                          color: Colors.amberAccent),
+                        borderRadius: BorderRadiusDirectional.circular(20),
+                        color: Colors.lightGreen,
+                      ),
                       constraints: BoxConstraints(minWidth: double.infinity),
                       child: Column(
                         children: <Widget>[
