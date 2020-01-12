@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:teatruth/sales_series.dart';
 import 'loginPage.dart';
 import 'QRScannerWidget.dart';
@@ -22,11 +23,22 @@ class HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text("Welcome \nDulaj"),
+              child: Text(
+                "Welcome \nDulaj",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               decoration: BoxDecoration(color: Colors.blue),
             ),
             ListTile(
-              title: Text('Profile'),
+              trailing: Icon(
+                Icons.supervised_user_circle,
+                color: Colors.black,
+              ),
+              title: Text(
+                'Profile',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
               onTap: () {
                 Navigator.push(
                     context,
@@ -35,7 +47,15 @@ class HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              title: Text('Selling History'),
+              trailing: Icon(
+                Icons.graphic_eq,
+                color: Colors.black,
+              ),
+              title: Text(
+                'Selling History',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
               onTap: () {
                 Navigator.push(
                     context,
@@ -46,7 +66,15 @@ class HomePageState extends State<HomePage> {
               // ...
             ),
             ListTile(
-              title: Text('Products '),
+              trailing: Icon(
+                Icons.panorama_wide_angle,
+                color: Colors.black,
+              ),
+              title: Text(
+                'Products ',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
               onTap: () {
                 Navigator.push(
                     context,
@@ -57,7 +85,15 @@ class HomePageState extends State<HomePage> {
               // ...
             ),
             ListTile(
-              title: Text('LogOut'),
+              trailing: Icon(
+                Icons.exit_to_app,
+                color: Colors.black,
+              ),
+              title: Text(
+                'LogOut',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
               onTap: () {
                 Navigator.pushReplacement(
                     context,
@@ -71,7 +107,10 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text(
+          "Home",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
       ),
       body: Container(
         child: Stack(
@@ -85,21 +124,46 @@ class HomePageState extends State<HomePage> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.all(10),
-                        child: Text('Boxes Scanned Today \n\n 10'),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Text(
+                              'Boxes Scanned Today',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "0",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
                         width: 100,
                         height: 110,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.lightBlueAccent,
-                        ),
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.lightBlueAccent,
+                            border: Border.all(width: 3)),
                       ),
                       Container(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(9),
                         width: 100,
                         height: 110,
-                        child: Text("Complains\n         0"),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Text(
+                              "Complains",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "0",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
+                          border: Border.all(width: 3),
                           color: Colors.redAccent,
                         ),
                       )
@@ -120,7 +184,8 @@ class HomePageState extends State<HomePage> {
                                   builder: (BuildContext context) =>
                                       QRWidget()));
                         },
-                        child: Text("Scan QR Code"),
+                        child: Text("Scan QR Code",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ))
                     ],
                   ),
@@ -139,7 +204,7 @@ class HomePageState extends State<HomePage> {
                             child: Text(
                               "Recent Transactions",
                               style: TextStyle(
-                                  color: Colors.blue,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),

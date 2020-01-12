@@ -37,14 +37,20 @@ class QRWidgetState extends State<QRWidget> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
-                    Text('Scan result: \n$qrText'),
+                    Text(
+                      'Scan result: \n$qrText',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     Spacer(
                       flex: 1,
                     ),
                     RaisedButton(
                       autofocus: false,
                       color: Colors.redAccent,
-                      child: Text("Add to Databse"),
+                      child: Text(
+                        "Add to Databse",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       onPressed: () {
                         print("herlloooo");
                       },
