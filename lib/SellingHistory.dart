@@ -39,7 +39,10 @@ class SellingRateState extends State<SellingRate> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Selling History"),
+        title: Text(
+          "Selling History",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
       ),
       body: Center(
         child: Sales_Chart(data: data),

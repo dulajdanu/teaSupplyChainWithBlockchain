@@ -15,7 +15,7 @@ class ProductsState extends State<Products> {
         backgroundColor: Colors.green,
         title: Text(
           "Products",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
       body: Stack(
@@ -56,7 +56,7 @@ Widget cards(title, price) {
       boxShadow: [
         BoxShadow(
           color: Colors.grey,
-          blurRadius: 6.0,
+          blurRadius: 3.0,
         ),
       ],
       color: Colors.white,

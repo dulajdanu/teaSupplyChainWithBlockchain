@@ -164,32 +164,47 @@ class HomePageState extends State<HomePage> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Icon(FontAwesomeIcons.qrcode),
-                      Container(
-                          child: RaisedButton(
-                        color: Colors.red,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      QRWidget()));
-                        },
-                        child: Text("Scan QR Code",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ))
-                    ],
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => QRWidget()));
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(colors: [
+                            Colors.green,
+                            Colors.greenAccent,
+                            Colors.lightGreen
+                          ])),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Icon(FontAwesomeIcons.qrcode),
+                          Text(
+                            "Scan QR Code",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10),
                   child: Container(
+                      height: 50,
                       decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [
+                          Colors.green,
+                          Colors.greenAccent,
+                          Colors.lightGreen
+                        ]),
                         borderRadius: BorderRadiusDirectional.circular(20),
-                        color: Colors.lightGreen,
                       ),
                       constraints: BoxConstraints(minWidth: double.infinity),
                       child: Column(
@@ -199,6 +214,7 @@ class HomePageState extends State<HomePage> {
                             child: Text(
                               "Recent Transactions",
                               style: TextStyle(
+                                  fontSize: 20,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
