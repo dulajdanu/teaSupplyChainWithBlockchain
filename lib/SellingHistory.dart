@@ -38,6 +38,7 @@ class SellingRateState extends State<SellingRate> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text("Selling History"),
       ),
       body: Center(

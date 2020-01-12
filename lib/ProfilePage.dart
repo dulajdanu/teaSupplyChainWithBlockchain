@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'updateName.dart';
 // import 'updatePassword.dart';
-import 'style/theme.dart' as Theme;
 // import 'package:my_mechanic/globals.dart' as globals;
 import 'updateName.dart';
 import 'updatePassword2.dart';
@@ -33,6 +32,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
         title: Text("Profile"),
       ),
       body: ListView(
@@ -52,8 +52,9 @@ class _ProfileState extends State<Profile> {
                       // Color(0xffd399c1),
                       // Color(0xff9b5acf),
                       // Color(0xff611cdf),
-                      Theme.Colors.loginGradientEnd,
-                      Theme.Colors.loginGradientStart
+                      Colors.green,
+                      Colors.lightGreenAccent,
+                      Colors.lightGreen,
                     ]),
                   )),
 
@@ -112,14 +113,14 @@ class _ProfileState extends State<Profile> {
                 //Navigator.of(context).pushNamed("/editName");
               },
               title: Text(
-                "Username",
+                "E Mail",
                 style: TextStyle(
                     fontSize: 20.0,
                     fontFamily: 'Montserret',
                     fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
-                "dulajdanu",
+                "dulajdanu@gmail.com",
                 style: TextStyle(
                     fontSize: 15.0,
                     fontFamily: 'Montserret',
@@ -163,13 +164,13 @@ class _ProfileState extends State<Profile> {
           Padding(
             padding: EdgeInsets.all(10.0),
             child: ListTile(
-              title: Text("Password",
+              title: Text("Contact Number",
                   style: TextStyle(
                       fontSize: 20.0,
                       fontFamily: 'Montserret',
                       fontWeight: FontWeight.bold)),
               subtitle: Text(
-                "******",
+                "0776396993",
                 style: TextStyle(
                     fontSize: 15.0,
                     fontFamily: 'Montserret',
@@ -183,7 +184,7 @@ class _ProfileState extends State<Profile> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => PasswordUpdate()));
+                        builder: (BuildContext context) => PhoneUpdate()));
               },
             ),
           ),

@@ -27,7 +27,10 @@ class HomePageState extends State<HomePage> {
                 "Welcome \nDulaj",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: BoxDecoration(
+                gradient:
+                    LinearGradient(colors: [Colors.green, Colors.greenAccent]),
+              ),
             ),
             ListTile(
               trailing: Icon(
