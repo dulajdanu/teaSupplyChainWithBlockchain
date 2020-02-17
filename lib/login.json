@@ -1,0 +1,243 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "ad",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "ma",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "dis",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "lo",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "su",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "adminc",
+        "outputs": [
+            {
+                "internalType": "contract AdminContract",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "distributorc",
+        "outputs": [
+            {
+                "internalType": "contract DistributorContract",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "loaderc",
+        "outputs": [
+            {
+                "internalType": "contract LoaderContract",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "managerc",
+        "outputs": [
+            {
+                "internalType": "contract ManagerContract",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "supervisorc",
+        "outputs": [
+            {
+                "internalType": "contract SupervisorContract",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_email",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_password",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_appId",
+                "type": "uint256"
+            }
+        ],
+        "name": "login",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_email",
+                "type": "string"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "token",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_appId",
+                "type": "uint256"
+            }
+        ],
+        "name": "registation",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_email",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_appId",
+                "type": "uint256"
+            }
+        ],
+        "name": "frogetPassword",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_email",
+                "type": "string"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "token",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_appId",
+                "type": "uint256"
+            }
+        ],
+        "name": "resetPassword",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
