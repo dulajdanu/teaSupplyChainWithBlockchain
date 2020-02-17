@@ -29,9 +29,6 @@ final EthereumAddress contractAddr =
 final EthereumAddress receiver =
     EthereumAddress.fromHex('0x05346F5978995345Ab999311eE6A9eD614Bc4F95');
 
-final EthereumAddress contractAddrDis =
-    EthereumAddress.fromHex('0x936C105E309D150BBd1FF09FdF0B0Cfd377638a8');
-
 class QRWidget extends StatefulWidget {
   @override
   QRWidgetState createState() => QRWidgetState();
@@ -50,21 +47,31 @@ class QRWidgetState extends State<QRWidget> {
       final credentials = await client.credentialsFromPrivateKey(privateKey);
       final ownAddress = await credentials.extractAddress();
 
-      final abiCode =
+      final boxAbi =
           '[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"boxIdcode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"}],"name":"LogDeleteBox","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"boxIdCode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"},{"indexed":false,"internalType":"string","name":"boxId","type":"string"},{"indexed":false,"internalType":"string","name":"oderId","type":"string"}],"name":"LogNewBox","type":"event"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"BoxArray","outputs":[{"internalType":"string","name":"boxId","type":"string"},{"internalType":"bytes32","name":"boxIdCode","type":"bytes32"},{"internalType":"string","name":"orderId","type":"string"},{"internalType":"string","name":"containerId","type":"string"},{"internalType":"string","name":"loaderScanDateAndTime","type":"string"},{"internalType":"uint256","name":"scantime","type":"uint256"},{"internalType":"uint256","name":"index","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"OrderArray","outputs":[{"internalType":"bytes32","name":"orderIdCode","type":"bytes32"},{"internalType":"string","name":"orderId","type":"string"},{"internalType":"string","name":"boxId","type":"string"},{"internalType":"uint256","name":"index","type":"uint256"},{"internalType":"uint256","name":"quantity","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_boxId","type":"string"}],"name":"isBox","outputs":[{"internalType":"bool","name":"isIndeed","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"_boxIdCode","type":"bytes32"}],"name":"isBoxx","outputs":[{"internalType":"bool","name":"isIndeed","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_boxId","type":"string"},{"internalType":"string","name":"_orderId","type":"string"}],"name":"insertBox","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_boxId","type":"string"}],"name":"getBox","outputs":[{"internalType":"bytes32","name":"boxIdCode","type":"bytes32"},{"internalType":"string","name":"boxId","type":"string"},{"internalType":"string","name":"orderId","type":"string"},{"internalType":"string","name":"containerId","type":"string"},{"internalType":"string","name":"loaderScanDateAndTime","type":"string"},{"internalType":"uint256","name":"distributorIdCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"i","type":"uint256"}],"name":"getBoxi","outputs":[{"internalType":"bytes32","name":"boxIdCode","type":"bytes32"},{"internalType":"string","name":"boxId","type":"string"},{"internalType":"string","name":"orderId","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"_boxIdCode","type":"bytes32"},{"internalType":"uint256","name":"i","type":"uint256"}],"name":"getBoxDistributori","outputs":[{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"_boxIdCode","type":"bytes32"},{"internalType":"string","name":"distributorId","type":"string"},{"internalType":"string","name":"dateAndTime","type":"string"}],"name":"scanDistributor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_orderId","type":"string"},{"internalType":"uint256","name":"quantity","type":"uint256"}],"name":"insertOrder","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_orderId","type":"string"}],"name":"getOrder","outputs":[{"internalType":"bytes32","name":"orderIdCode","type":"bytes32"},{"internalType":"string","name":"orderId","type":"string"},{"internalType":"uint256","name":"index","type":"uint256"},{"internalType":"uint256","name":"quantity","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getLastBox","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}]';
 
       final contract = new DeployedContract(
-          ContractAbi.fromJson(abiCode, 'BoxContract'), contractAddr);
+          ContractAbi.fromJson(boxAbi, 'BoxContract'), contractAddr);
       final scanFunction = contract.function('scanDistributor');
+      final isBox = contract.function('isBoxx');
 
       // final UintType intV = 1 as UintType;
-      final bal = await client.call(
-          contract: contract, function: scanFunction, params: ["", "", ""]);
+      final box = await client.call(
+          contract: contract, function: isBox, params: [hexToBytes(qrText)]);
 
-      // BigInt bala = bal.first;
-      print(bal.first);
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+      if (box[0] == true) {
+        print("this is a box");
+      } else {
+        print("not a box");
+      }
+
+      // final bal = await client.call(
+      //     contract: contract, function: scanFunction, params: ["", "", ""]);
+
+      // // BigInt bala = bal.first;
+      // print(bal.first);
+      // Navigator.pushReplacement(context,
+      //     MaterialPageRoute(builder: (BuildContext context) => HomePage()));
 
       // print('We have ${balance.first} MetaCoins');
     } catch (e) {
@@ -113,6 +120,7 @@ class QRWidgetState extends State<QRWidget> {
                       ),
                       onPressed: () {
                         print("herlloooo");
+                        getVal();
                       },
                     )
                   ],

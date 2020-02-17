@@ -101,9 +101,10 @@ class loginPageState extends State<loginPage> {
       final disData = await client.call(
           contract: DisContract, function: getDataFunction, params: [email]);
 
-      print(disData);
+      print(disData[2].split('#')[2]);
       var distributorIdCode = disData[0];
       prefs.setString('disId', bytesToHex(distributorIdCode));
+      prefs.setString('usrType', disData[2].split('#')[2]);
       print(prefs.getString('disId'));
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => HomePage()));
