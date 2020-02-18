@@ -36,6 +36,8 @@ class loginPage extends StatefulWidget {
 }
 
 class loginPageState extends State<loginPage> {
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
@@ -60,62 +62,79 @@ class loginPageState extends State<loginPage> {
 
   getVal() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (_formKey.currentState.validate()) {
+      print("get val called");
+      _formKey.currentState.save();
 
-    print("get val called");
-    _formKey.currentState.save();
-    print(email);
-    print(password);
-    try {
-      final client = Web3Client(rpcUrl, Client(), socketConnector: () {
-        return IOWebSocketChannel.connect(wsUrl).cast<String>();
-      });
-      final credentials = await client.credentialsFromPrivateKey(privateKey);
-      final ownAddress = await credentials.extractAddress();
-      final abiCode =
-          '[{"inputs":[{"internalType":"address","name":"ad","type":"address"},{"internalType":"address","name":"ma","type":"address"},{"internalType":"address","name":"dis","type":"address"},{"internalType":"address","name":"lo","type":"address"},{"internalType":"address","name":"su","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"constant":true,"inputs":[],"name":"adminc","outputs":[{"internalType":"contract AdminContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"distributorc","outputs":[{"internalType":"contract DistributorContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"loaderc","outputs":[{"internalType":"contract LoaderContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"managerc","outputs":[{"internalType":"contract ManagerContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"supervisorc","outputs":[{"internalType":"contract SupervisorContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_password","type":"string"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"login","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"bytes32","name":"token","type":"bytes32"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"registation","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"frogetPassword","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"bytes32","name":"token","type":"bytes32"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"resetPassword","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]';
-
-      final disAbiCode =
-          '[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"emailcode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"}],"name":"LogDeleteDistributor","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"emailCode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"},{"indexed":false,"internalType":"string","name":"email","type":"string"},{"indexed":false,"internalType":"bytes32","name":"passwordCode","type":"bytes32"},{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":false,"internalType":"uint256","name":"contactNumber","type":"uint256"},{"indexed":false,"internalType":"string","name":"userAddress","type":"string"},{"indexed":false,"internalType":"uint256","name":"userAccess","type":"uint256"}],"name":"LogNewDistributor","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"emailCode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"},{"indexed":false,"internalType":"string","name":"email","type":"string"},{"indexed":false,"internalType":"bytes32","name":"passwordCode","type":"bytes32"},{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":false,"internalType":"uint256","name":"contactNumber","type":"uint256"},{"indexed":false,"internalType":"string","name":"userAddress","type":"string"},{"indexed":false,"internalType":"uint256","name":"userAccess","type":"uint256"}],"name":"LogUpdateDistributor","type":"event"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"distributorArray","outputs":[{"internalType":"string","name":"email","type":"string"},{"internalType":"bytes32","name":"emailCode","type":"bytes32"},{"internalType":"bytes32","name":"passwordCode","type":"bytes32"},{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"contactNumber","type":"uint256"},{"internalType":"string","name":"userAddress","type":"string"},{"internalType":"uint256","name":"userAccess","type":"uint256"},{"internalType":"uint256","name":"index","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"_emailCode","type":"bytes32"}],"name":"isDistributor","outputs":[{"internalType":"bool","name":"isIndeed","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"createDistributorToken","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"getDistributorToken","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"bytes32","name":"_token","type":"bytes32"}],"name":"checkDistributorToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_password","type":"string"}],"name":"setPassword","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_address","type":"string"},{"internalType":"uint256","name":"_telephone","type":"uint256"}],"name":"insertDistributor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"deleteDistributor","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"blockDistributor","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256","name":"usreAccess","type":"uint256"}],"name":"editUserAccess","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"getDistributor","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"string","name":"email","type":"string"},{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"contactNumber","type":"uint256"},{"internalType":"string","name":"userAddress","type":"string"},{"internalType":"uint256","name":"userAccess","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"i","type":"uint256"}],"name":"getDistributori","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"string","name":"","type":"string"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getDistributorCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_name","type":"string"}],"name":"updateDistributorName","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_userAddress","type":"string"}],"name":"updateDistributorAddress","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256","name":"_contactNumber","type":"uint256"}],"name":"updateDistributorContactNumber","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256[]","name":"index","type":"uint256[]"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_userAddress","type":"string"},{"internalType":"uint256","name":"_contactNumber","type":"uint256"}],"name":"updateDistributor","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"updateDistributoriEmail","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"checkDistributorUserAccess","outputs":[{"internalType":"uint256","name":"userAccess","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"checkDistributorPasswordCode","outputs":[{"internalType":"bytes32","name":"passwordCode","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"}]';
-
-      final contract = new DeployedContract(
-          ContractAbi.fromJson(abiCode, 'Login'), contractAddr);
-      print("before distributor");
-      final DisContract = new DeployedContract(
-          ContractAbi.fromJson(disAbiCode, 'DistributorContract'),
-          contractAddrDis);
-      final loginFunction = contract.function('login');
-      print("after distributor");
-      final getDataFunction = DisContract.function('getDistributor');
-      print("after dis 2");
-
-      // final UintType intV = 1 as UintType;
-      final bal = await client.call(
-          contract: contract,
-          function: loginFunction,
-          params: [email, password, BigInt.from(3)]);
-
-      // BigInt bala = bal.first;
-
-      print("before dis function");
       print(email);
+      print(password);
+      try {
+        final client = Web3Client(rpcUrl, Client(), socketConnector: () {
+          return IOWebSocketChannel.connect(wsUrl).cast<String>();
+        });
+        final credentials = await client.credentialsFromPrivateKey(privateKey);
+        final ownAddress = await credentials.extractAddress();
+        final abiCode =
+            '[{"inputs":[{"internalType":"address","name":"ad","type":"address"},{"internalType":"address","name":"ma","type":"address"},{"internalType":"address","name":"dis","type":"address"},{"internalType":"address","name":"lo","type":"address"},{"internalType":"address","name":"su","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"constant":true,"inputs":[],"name":"adminc","outputs":[{"internalType":"contract AdminContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"distributorc","outputs":[{"internalType":"contract DistributorContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"loaderc","outputs":[{"internalType":"contract LoaderContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"managerc","outputs":[{"internalType":"contract ManagerContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"supervisorc","outputs":[{"internalType":"contract SupervisorContract","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_password","type":"string"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"login","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"bytes32","name":"token","type":"bytes32"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"registation","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"frogetPassword","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"bytes32","name":"token","type":"bytes32"},{"internalType":"uint256","name":"_appId","type":"uint256"}],"name":"resetPassword","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]';
 
-      final disData = await client.call(
-          contract: DisContract, function: getDataFunction, params: [email]);
+        final disAbiCode =
+            '[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"emailcode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"}],"name":"LogDeleteDistributor","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"emailCode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"},{"indexed":false,"internalType":"string","name":"email","type":"string"},{"indexed":false,"internalType":"bytes32","name":"passwordCode","type":"bytes32"},{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":false,"internalType":"uint256","name":"contactNumber","type":"uint256"},{"indexed":false,"internalType":"string","name":"userAddress","type":"string"},{"indexed":false,"internalType":"uint256","name":"userAccess","type":"uint256"}],"name":"LogNewDistributor","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"emailCode","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"index","type":"uint256"},{"indexed":false,"internalType":"string","name":"email","type":"string"},{"indexed":false,"internalType":"bytes32","name":"passwordCode","type":"bytes32"},{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":false,"internalType":"uint256","name":"contactNumber","type":"uint256"},{"indexed":false,"internalType":"string","name":"userAddress","type":"string"},{"indexed":false,"internalType":"uint256","name":"userAccess","type":"uint256"}],"name":"LogUpdateDistributor","type":"event"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"distributorArray","outputs":[{"internalType":"string","name":"email","type":"string"},{"internalType":"bytes32","name":"emailCode","type":"bytes32"},{"internalType":"bytes32","name":"passwordCode","type":"bytes32"},{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"contactNumber","type":"uint256"},{"internalType":"string","name":"userAddress","type":"string"},{"internalType":"uint256","name":"userAccess","type":"uint256"},{"internalType":"uint256","name":"index","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"_emailCode","type":"bytes32"}],"name":"isDistributor","outputs":[{"internalType":"bool","name":"isIndeed","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"createDistributorToken","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"getDistributorToken","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"bytes32","name":"_token","type":"bytes32"}],"name":"checkDistributorToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_password","type":"string"}],"name":"setPassword","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_address","type":"string"},{"internalType":"uint256","name":"_telephone","type":"uint256"}],"name":"insertDistributor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"deleteDistributor","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"blockDistributor","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256","name":"usreAccess","type":"uint256"}],"name":"editUserAccess","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"getDistributor","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"string","name":"email","type":"string"},{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"contactNumber","type":"uint256"},{"internalType":"string","name":"userAddress","type":"string"},{"internalType":"uint256","name":"userAccess","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"i","type":"uint256"}],"name":"getDistributori","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"string","name":"","type":"string"},{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getDistributorCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_name","type":"string"}],"name":"updateDistributorName","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"string","name":"_userAddress","type":"string"}],"name":"updateDistributorAddress","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256","name":"_contactNumber","type":"uint256"}],"name":"updateDistributorContactNumber","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"},{"internalType":"uint256[]","name":"index","type":"uint256[]"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_userAddress","type":"string"},{"internalType":"uint256","name":"_contactNumber","type":"uint256"}],"name":"updateDistributor","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_email","type":"string"}],"name":"updateDistributoriEmail","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"checkDistributorUserAccess","outputs":[{"internalType":"uint256","name":"userAccess","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"email","type":"bytes32"}],"name":"checkDistributorPasswordCode","outputs":[{"internalType":"bytes32","name":"passwordCode","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"}]';
 
-      print(disData);
-      print(disData[2].split('#')[2]);
-      var distributorIdCode = disData[0];
-      prefs.setString('disIdCode', bytesToHex(distributorIdCode));
-      prefs.setString('usrType', disData[2].split('#')[2]);
-      prefs.setString('disMail', email);
-      print(prefs.getString('disId'));
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        final contract = new DeployedContract(
+            ContractAbi.fromJson(abiCode, 'Login'), contractAddr);
+        print("before distributor");
+        final DisContract = new DeployedContract(
+            ContractAbi.fromJson(disAbiCode, 'DistributorContract'),
+            contractAddrDis);
+        final loginFunction = contract.function('login');
+        print("after distributor");
+        final getDataFunction = DisContract.function('getDistributor');
+        print("after dis 2");
 
-      // print('We have ${balance.first} MetaCoins');
-    } catch (e) {
-      print("exception occured");
-      print(e);
+        // final UintType intV = 1 as UintType;
+        final bal = await client.call(
+            contract: contract,
+            function: loginFunction,
+            params: [email, password, BigInt.from(3)]);
+
+        // BigInt bala = bal.first;
+
+        print("before dis function");
+        print(email);
+
+        final disData = await client.call(
+            contract: DisContract, function: getDataFunction, params: [email]);
+
+        print(disData);
+        print(disData[2].split('#')[2]);
+        var distributorIdCode = disData[0];
+        prefs.setString('disIdCode', bytesToHex(distributorIdCode));
+        prefs.setString('usrType', disData[2].split('#')[2]);
+        prefs.setString('disMail', email);
+        print(prefs.getString('disId'));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+
+        // print('We have ${balance.first} MetaCoins');
+      } catch (e) {
+        print("exception occured");
+        print(e);
+        final snackBar = SnackBar(
+          content: Text(
+            "E Mail and Password Doesnt Match",
+            style: TextStyle(color: Colors.red),
+          ),
+        );
+        _scaffoldKey.currentState.showSnackBar(snackBar);
+      }
+    } else {
+      final snackBar = SnackBar(
+        content: Text(
+          "Please Check the Input Dear",
+          style: TextStyle(color: Colors.red),
+        ),
+      );
+      _scaffoldKey.currentState.showSnackBar(snackBar);
     }
   }
 
@@ -125,11 +144,22 @@ class loginPageState extends State<loginPage> {
     // getVal();
   }
 
+  String validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Enter Valid Email';
+    else
+      return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     // EtherAmount balance = ethClient.getBalance();
 
     return Scaffold(
+        key: _scaffoldKey,
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
             left: true,
@@ -187,9 +217,7 @@ class loginPageState extends State<loginPage> {
                                     Icons.email,
                                     color: Colors.black,
                                   )),
-                              validator: (value) => value.isEmpty
-                                  ? 'E mail cannot be empty'
-                                  : null,
+                              validator: validateEmail,
                               onSaved: (value) => email = value.trim(),
                             ),
                           ),

@@ -41,6 +41,7 @@ class QRWidgetState extends State<QRWidget> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   var qrText = "";
   QRViewController controller;
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   getVal() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -142,7 +143,7 @@ class QRWidgetState extends State<QRWidget> {
 
             final updateOrderProgress =
                 orderContract.function('updateOrderOrderProgress');
-
+            print(newProgress);
             await client.sendTransaction(
                 credentials,
                 Transaction.callContract(
@@ -240,6 +241,13 @@ class QRWidgetState extends State<QRWidget> {
         }
       } else {
         print("already scanned");
+        final snackBar = SnackBar(
+          content: Text(
+            "Already Scanned",
+            style: TextStyle(color: Colors.red),
+          ),
+        );
+        _scaffoldKey.currentState.showSnackBar(snackBar);
       }
 
       // // BigInt bala = bal.first;
@@ -250,6 +258,14 @@ class QRWidgetState extends State<QRWidget> {
       // print('We have ${balance.first} MetaCoins');
     } catch (e) {
       print(e);
+      print("already scanned");
+      final snackBar = SnackBar(
+        content: Text(
+          "Error Occured",
+          style: TextStyle(color: Colors.red),
+        ),
+      );
+      _scaffoldKey.currentState.showSnackBar(snackBar);
     }
   }
 
@@ -257,6 +273,7 @@ class QRWidgetState extends State<QRWidget> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      key: _scaffoldKey,
       body: Column(
         children: <Widget>[
           Expanded(
